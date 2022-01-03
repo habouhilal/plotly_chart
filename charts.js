@@ -17,6 +17,7 @@ function init() {
     var firstSample = sampleNames[0];
     buildCharts(firstSample);
     buildMetadata(firstSample);
+
   });
 }
 
@@ -120,7 +121,6 @@ function buildCharts(sample) {
         size: sample_values ,
         opacity: [1, 0.8, 0.6, 0.4],
         },
-      type: 'scatter'
     }
  
   ];
@@ -128,14 +128,10 @@ function buildCharts(sample) {
     // 2. Create the layout for the bubble chart.
     var bubbleLayout = {
     title: 'Bacteria Cultures Per Sample',
+    yaxis: { title: "Sample Value"},
     xaxis: {title: "OTU ID"},
-    xaxis: {
-    },
-    yaxis: {
-    },
     showlegend: false,
-    hovermode: 'closest'
-    
+    hovermode: 'closest',
     };
 
   // 3. Use Plotly to plot the data with the layout.
@@ -185,3 +181,29 @@ function buildCharts(sample) {
     Plotly.newPlot('gauge',gaugeData,gaugeLayout);
   });
 }
+function openTab(pageName, elmnt, color) {
+  // Hide all elements with class="tabcontent" by default */
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+
+    // Remove the background color of all tablinks/buttons
+    tablinks = document.getElementsByClassName("tablink");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].style.backgroundColor = "";
+      }
+
+    // Show the specific tab content
+     document.getElementById(pageName).style.display = "block";
+    // Add the specific color to the button used to open the tab content
+     elmnt.style.backgroundColor = color;
+     PANEL.html("");
+     init();
+    
+
+}
+
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
